@@ -274,7 +274,7 @@ http.createServer(function (req, res) {
             case "/menu_get": // gets the menu table in L.Obj
                 fetch_menu(req, res);
                 break;
-            case "/penal_action":
+            case "/penal_action": //penalties put or fetch
                 penal_action(req,res);
                 break;
         }
