@@ -3,13 +3,18 @@ $(function () {
     $("#dishsubmit").on("click", function () {
         var dishes = document.getElementsByName('dishes');
         let req = [];
+        let message = "Today's Menu : \n"
+        
         for (i = 0; i < dishes.length; i++) {
             if (dishes[i].value == "") {
                 alert("Fields Shouldn't be empty");
                 return;
             }
+            message += "<b><i>" + dishes[i].value + "</i></b>\n";
+            alert(message);
             req.push(dishes[i].value);
         }
+        
         req.push("0");
         $.ajax('http://127.0.0.1:8081/menu_enter', {
             method: "POST",
@@ -24,6 +29,11 @@ $(function () {
                 }
             }
         });
+        let paramperson = {'chat_id':'1158109698','text':message,'parse_mode':'HTML'}
+        $.post('https://api.telegram.org/bot<token>', paramperson, function(returnedData){
+            console.log(returnedData);
+        });
+        
     });
     $('#fetchb').on("click", function () {
         $.ajax('http://127.0.0.1:8081/menu_get', {
