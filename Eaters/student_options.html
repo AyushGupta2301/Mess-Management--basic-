@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Portal</title>
+    <link rel="stylesheet" type="text/css" href="../Resources/mainstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../Resources/jquery-min.js"></script>
+</head>
+
+<body>
+    <script src="student_requests.js"></script>
+
+    <h2>Welcome To Student Portal</h2>
+    <p>Choose Your Action :</p>
+
+    <div class="tab">
+        <button class="tablinks" onclick="opentab(event, 'set_atten')" id="defaultOpen">Menu and Attendance</button>
+        <button class="tablinks" onclick="opentab(event, 'penal_view')">View Penalties</button>
+        <!-- <button class="tablinks" onclick="opentab(event, 'end_session')">End Session</button> -->
+    </div>
+
+    <div id="set_atten" class="tabcontent">
+        <h3>Menu and Attendance prompt</h3>
+        The next batch menu is:
+        <div id="menu"></div>
+        <form id="datamain">
+            <span class="basespan" id="baserefer"><span>Student ID :</span><input type="text" name="studID"></span>
+        </form>
+        <span id="buttonbar">
+            <button type="button" id="tenAtten_submit">Post Attendance</button>
+            <!-- <button type="button" id="dishsubmit" onclick="dish_submit()">Submit</button> -->
+        </span>
+    </div>
+
+    <div id="penal_view" class="tabcontent">
+        <h3>Penalties</h3>
+        Your penalty details:
+        <div id="penalty">
+            <!-- <table id = "tpenalty" border="1">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Penalty Amount</th>
+                    <th>Penalty Date</th>
+                </tr>
+            </table> -->
+        </div>
+        <form id="datamain">
+            <span class="basespan" id="baserefer"><span>Student ID :</span><input type="text" name="pstudID"></span>
+        </form>
+        <span id="buttonbar">
+            <button type="button" id="penal_submit">Fetch Penalties</button>
+            <!-- <button type="button" id="dishsubmit" onclick="dish_submit()">Submit</button> -->
+        </span>
+        <div id="penalties"></div>
+    </div>
+
+    
+    <script defer src="student_menu_general.js"></script>
+</body>
+
+</html>

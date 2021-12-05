@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Caterer Portal</title>
+    <link rel="stylesheet" type="text/css" href="../Resources/mainstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../Resources/jquery-min.js"></script>
+</head>
+
+<body>
+    <script src="caterer_requests.js"></script>
+
+    <h2>Welcome To Caterer Portal</h2>
+    <p>Choose Your Action :</p>
+
+    <div class="tab">
+        <button class="tablinks" onclick="opentab(event, 'set_menu')" id="defaultOpen">Set Menu</button>
+        <button class="tablinks" id="fetchb" onclick="opentab(event, 'fetch_batch')">Batch Details</button>
+        <button class="tablinks" id ="stsess" onclick="opentab(event, 'start_session')">Start Session</button>
+        <button class="tablinks" id="endsess" onclick="opentab(event, 'end_session')">End Session</button>
+    </div>
+
+    <div id="set_menu" class="tabcontent">
+        <h3>Set Menu</h3>
+        Set the next batch menu
+        <form id="datamain">
+            <span class="basespan" id="baserefer"><span>Dish Name :</span><input type="text" name="dishes"></span>
+        </form>
+        <span id="buttonbar">
+            <button type="button" onclick="add_dish()">New Dish</button>
+            <button type="button" id="dishsubmit" onclick="dish_submit()">Submit</button>
+        </span>
+    </div>
+
+    <div id="fetch_batch" class="tabcontent">
+        <h3>Batch Details</h3>
+        The menu is:
+        <div id="menu"></div>
+        <br>Tentative Attendance:
+        <div id="tenAtten"></div>
+        <br>The ingredients required are:
+        <div id="ingredients"></div>
+        <br>
+        <!-- <form id="datamain">
+            <span class="basespan" id="baserefer"><span>Dish Name :</span><input type="text" name="dishes"></span>
+        </form> -->
+        <span id="buttonbar">
+            <button type="button" onclick="add_dish()">Confirm and Start Preparation</button>
+            <!-- <button type="button" id="dishsubmit" onclick="dish_submit()">Submit</button> -->
+        </span>
+    </div>
+
+    <div id="start_session" class="tabcontent">
+        <h3>Session Details</h3>
+        Total Attendance: 
+        <div id="totAtten">500</div>
+        Tentative Attendance:
+        <div id="tenAttens"></div>
+        Actual Attendance:
+        <div id="actAtten"></div>
+        <span id="buttonbar">
+            <button type="button" onclick="add_dish()">New Dish</button>
+            <button type="button" id="dishsubmit" onclick="dish_submit()">Submit</button>
+        </span>
+    </div>
+
+    <div id="end_session" class="tabcontent">
+        <h3>Session Details</h3>
+        Session Attendance:
+        <div id="actAtten"></div>
+        <span id="buttonbar">
+            <button type="button" onclick="add_dish()">New Dish</button>
+            <button type="button" id="dishsubmit" onclick="dish_submit()">Submit</button>
+        </span>
+    </div>
+
+    
+    <script defer src="caterer_menu_general.js"></script>
+</body>
+
+</html>
