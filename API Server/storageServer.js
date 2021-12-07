@@ -15,7 +15,7 @@ var con = mysql.createConnection({
 
 mongoclient.connect(URI, function (err, database) {
     if (err) throw err;
-    console.log("connected to database");
+    console.log("MongoDB connection Success");
 })
 
 con.connect(function (err) {

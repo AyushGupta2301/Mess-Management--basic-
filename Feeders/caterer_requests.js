@@ -14,7 +14,7 @@ $(function () {
             // alert(message);
             req.push(dishes[i].value);
         }
-        message += "Please post your attendance on our Website\n";
+        message += "\nRespond with '\/Attend' or post your attendance on our Website\n";
         req.push("0");
         $.ajax('http://127.0.0.1:8081/menu_enter', {
             method: "POST",
