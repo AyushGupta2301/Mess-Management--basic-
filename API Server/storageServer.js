@@ -6,7 +6,6 @@ var mongo = require('mongodb')
 var mongoclient = mongo.MongoClient
 let URI = "mongodb://ayush:ayush2301@localhost:27017/wmanage"
 
-// To do attendence put, fetch, defaulters fetch (1,0) waale and client side ingredient processing
 
 var con = mysql.createConnection({
     user: 'root',
@@ -150,7 +149,17 @@ function atten_put(req, res) {
                 tquery = "update Attendance set actAtten = " + attenobj.value + " where (tenAtten = 1 and studID = '" + attenobj.studID + "');"
                 con.query(tquery, function (err, result) {
                     if (err) throw err;
-                    console.log("insertion into Attendance");
+                    // console.log("insertion into act" + attenobj.studID);
+                    res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
+                    res.write("Actual Attendence of " + attenobj.studID + " Updated");
+                    res.end();
+                })
+                break;
+            case "actAttensp": //Updates actual attendance
+                tquery = "update Attendance set actAtten = " + attenobj.value + " where (studID = '" + attenobj.studID + "');"
+                con.query(tquery, function (err, result) {
+                    if (err) throw err;
+                    console.log("insertion into act" + attenobj.studID);
                     res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
                     res.write("Actual Attendence of " + attenobj.studID + " Updated");
                     res.end();
@@ -165,10 +174,20 @@ function atten_put(req, res) {
                     res.write("Student " + attenobj.studID + " Added");
                     res.end();
                 })
+                break;
+            case "spAtten": //Special Attendance (Substitution)
+                tquery = "update Attendance set spAtten = " + attenobj.value + " where (studID = '" + attenobj.studID + "');"
+                con.query(tquery,function(err, result){
+                    if(err) throw err;
+                    console.log("Updated A Special Attendance");
+                    res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
+                    res.write("Special Attendance of student " + attenobj.studID + " Updated");
+                    res.end();
+                })
+                break;
         }
     })
 }
-//comment
 
 function penal_action(req,res){
     let decoder = new strdec('utf-8');
@@ -205,6 +224,52 @@ function penal_action(req,res){
                     })
                 })
 
+        }
+    })
+}
+
+function sub_gen(req,res){
+    let decoder= new strdec('utf-8');
+    let buffer = "";
+    req.on("data",function(chunk){
+        buffer+=decoder.write(chunk);
+    })
+    req.on("end",function(){
+        buffer+=decoder.end();
+        let attenobj = JSON.parse(buffer);
+        switch(attenobj.type){
+            case "availSubs":
+                tquery = "select * from Attendance where(spAtten = 1);"
+                con.query(tquery,function(err,resp){
+                    res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
+                    res.write(JSON.stringify(resp));
+                    res.end();
+                })
+                break;
+            case "availSup":
+                tquery = "select * from Attendance where(tenAtten = 0 and actAtten = 1);"
+                con.query(tquery,function(err,resp){
+                    res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
+                    res.write(JSON.stringify(resp));
+                    res.end();
+                })
+                break;
+            case "putSubs":
+                tquery = "insert into Substitutions values ('"+attenobj.emitID+"','"+attenobj.recvID+"');"
+                con.query(tquery,function(err,resp){
+                    res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
+                    res.write("Substitution table updated");
+                    res.end();
+                })
+                break;
+            case "fetchSubsT":
+                tquery = "select * from Substitutions;"
+                con.query(tquery,function(err,result){
+                    res.writeHead(200, "OK", { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" });
+                    res.write(JSON.stringify(result));
+                    res.end();
+                })
+                break;
         }
     })
 }
@@ -276,6 +341,9 @@ http.createServer(function (req, res) {
                 break;
             case "/penal_action": //penalties put or fetch
                 penal_action(req,res);
+                break;
+            case "/sub_gen": //Fetch/Put Substitution data L.obj/JOSN
+                sub_gen(req, res);
                 break;
         }
     }
