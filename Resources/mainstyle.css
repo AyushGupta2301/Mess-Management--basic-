@@ -47,12 +47,12 @@ body {
     justify-content: center;
 }
 
-#menu, #ingredients, #tenAtten, #actAtten, #totAtten, #tenAttens{
+#menu, #ingredients, #tenAtten, #actAtten, #totAtten, #tenAttens, #avspAtten, #spAtten{
   background-color: aqua;
   padding:10px;
 }
 
-.tpenalty{
+.tpenalty, .tspAtten{
   border:none;
   background-color: aqua;
   border-collapse: collapse;
@@ -60,13 +60,13 @@ body {
   width: fit-content;
 }
 
-.tpenalty th{
+.tpenalty th, .tspAtten th{
   font-size: 20px;
   border:none;
   padding: 10px;
 }
 
-.tpenalty td{
+.tpenalty td, .tspAtten td{
   border:none;
   padding: 10px;
   
