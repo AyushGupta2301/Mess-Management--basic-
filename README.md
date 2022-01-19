@@ -16,7 +16,7 @@ Annapurna facilitates both the eaters and the feeders.
 - Special attendees are those who didn't prompt their tentative attendance, but showed up, in this case, they can eat the substituted food (if available)
 
 Annapurna is primarily made (but is not limited to) be used in public messes. The messes would have to follow a Time Table, an example use of Annapurna for a mess with 3pm as the food serving batch is:
-> 7:00 AM -- The caterer sets the menu
-> 7:00 AM - 11:00 AM -- The eaters could post their tentative attendance
-> 11:00 AM - 12:00 PM -- The caterer recieves the ingredient list based on the attendance and confirms the same in the inventory
-> 12:00 PM -- The food preparation starts
+- 7:00 AM -- The caterer sets the menu
+- 7:00 AM - 11:00 AM -- The eaters could post their tentative attendance
+- 11:00 AM - 12:00 PM -- The caterer recieves the ingredient list based on the attendance and confirms the same in the inventory
+- 12:00 PM -- The food preparation starts
